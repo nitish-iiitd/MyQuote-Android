@@ -98,7 +98,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
 
-        // return contact list
+        // return quotes list
         return quotes;
     }
 

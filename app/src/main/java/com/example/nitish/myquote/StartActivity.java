@@ -21,8 +21,8 @@ public class StartActivity extends AppCompatActivity {
 
     public void goToAddQuote(View v)
     {
-        Intent createscreen = new Intent(this,CreateActivity.class);
-        startActivity(createscreen);
+        Intent addscreen = new Intent(this,AddActivity.class);
+        startActivity(addscreen);
     }
 
 }

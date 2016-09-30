@@ -51,11 +51,21 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    // resetting database
+    public void onReset(SQLiteDatabase db) {
+        // Drop older table if existed
+        db.execSQL("DELETE FROM " + TABLE_QUOTES);
+
+        // Create tables again
+        //onCreate(db);
+    }
+
     // Adding new contact
     public void addQuote(Quote quote) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
+        System.out.println("Quote inside database :"+quote.getText());
         values.put(KEY_TEXT, quote.getText()); // Quote text
 
         // Inserting Row

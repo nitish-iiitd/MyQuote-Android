@@ -19,6 +19,8 @@
         android:text="No Quotes"
         android:textSize="25sp"
         android:layout_weight="5"
+        android:maxLines = "15"
+        android:scrollbars = "vertical"
         />
 
 
@@ -26,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_weight="1"
+
         android:padding="15dp">
 
         <TextView
@@ -36,7 +38,7 @@
             android:textSize="25sp" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/quoteid"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -46,6 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Create MyQuote"
-        android:textAllCaps="false"/>
+        android:textAllCaps="false"
+        android:onClick="createQuote"/>
 
 </LinearLayout>

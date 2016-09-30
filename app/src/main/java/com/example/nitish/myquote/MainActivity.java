@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         paint = new Paint();
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(Color.BLUE);
-        paint.setTextSize(25);
+        paint.setTextSize(250);
 //loading bitmap from drawable
         originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.back);
 //scaling of bitmap
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
+
 //loading original bitmap again (undoing all editing)
                 image = originalBitmap.copy(Bitmap.Config.RGB_565, true);
                 iv_ttx.setImageBitmap(image);
@@ -75,28 +75,26 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View arg0) {
-                // TODO Auto-generated method stub
 //funtion save image is called with bitmap image as parameter
                 saveImage(image);
 
             }
         });
-
-
-        iv_ttx.setOnTouchListener(new OnTouchListener() {
-
-            @Override
-            public boolean onTouch(View arg0, MotionEvent arg1) {
-                // TODO Auto-generated method stub
-                String user_text = et_sample.getText().toString();
-//gettin x,y cordinates on screen touch
-                float scr_x = arg1.getRawX();
-                float scr_y = arg1.getRawY();
-//funtion called to perform drawing
-                createImage(scr_x, scr_y, user_text);
-                return true;
+        String user_text;
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if (extras == null) {
+                user_text = null;
+            } else {
+                user_text = extras.getString("quote");
             }
-        });
+        } else {
+            user_text = (String) savedInstanceState.getSerializable("quote");
+        }
+
+//funtion called to perform drawing
+        createImage(100, 200, user_text);
+
 
     }
 

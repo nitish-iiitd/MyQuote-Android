@@ -23,36 +23,32 @@ import java.util.Random;
 
 public class CreateActivity extends AppCompatActivity {
 
-    Bitmap originalBitmap, image;
-    ImageView iv_ttx;
-    EditText et_sample;
-
-    Paint paint;
-
+    /*
+     * Gets all the quotes from database and fills the textView with all the quotes, for choosing.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create);
         String quotesdisp = "";
-        List<Quote> quotes = new ArrayList<Quote>();
         DatabaseHandler dh = new DatabaseHandler(this);
-        quotes = dh.getAllQuotes();
+        List<Quote> quotes = dh.getAllQuotes();
         for (int i = 0; i < quotes.size(); i++) {
             quotesdisp = quotesdisp + quotes.get(i).get_id() + " : " + quotes.get(i).getText() + "\n";
         }
         TextView quotestv = (TextView) findViewById(R.id.quotes);
         quotestv.setText(quotesdisp);
         quotestv.setMovementMethod(new ScrollingMovementMethod());
-
-
     }
 
+    /*
+     * Gets the selected Quote from its ID and pass it to MainActivity for image creation
+     */
     public void createQuote(View v) {
         TextView quoteid = (TextView) findViewById(R.id.quoteid);
         int id = Integer.parseInt(quoteid.getText().toString());
         DatabaseHandler dh = new DatabaseHandler(this);
-        Quote q = new Quote();
-        q = dh.getQuote(id);
+        Quote q = dh.getQuote(id);
         Intent startscreen = new Intent(this,MainActivity.class);
         System.out.println("Quote(createquote):"+q.getText());
         startscreen.putExtra("quote",q.getText());

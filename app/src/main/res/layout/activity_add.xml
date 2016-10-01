@@ -32,7 +32,10 @@
         android:inputType="textMultiLine"
         android:ems="10"
         android:id="@+id/quote"
-        android:layout_margin="20dp"/>
+        android:layout_margin="20dp"
+        android:maxLines ="4"
+        android:maxLength ="250"
+        android:scrollHorizontally="false"/>
 
     <Button
         android:text="Add Quote"

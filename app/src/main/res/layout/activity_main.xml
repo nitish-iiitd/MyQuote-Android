@@ -12,26 +12,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Save Image"
-        android:textSize="14sp" />
+        android:textSize="20sp"
+        android:theme="@style/MyButton"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        />
     <ImageView
         android:id="@+id/iv_ttx"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="fitXY"
-        android:src="@drawable/back" />
-
-
-
-
-
-    <Button
-        android:id="@+id/btn_clr_all"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/et_txt"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="Clear All"
-        android:textSize="14sp" />
+        android:scaleType="fitCenter"
+        android:src="@drawable/back3" />
+
+
 
 </LinearLayout>

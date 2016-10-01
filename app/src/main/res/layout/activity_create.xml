@@ -16,8 +16,8 @@
         android:id="@+id/quotes"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="No Quotes"
-        android:textSize="25sp"
+        android:text="No Quotes !"
+        android:textSize="15sp"
         android:layout_weight="5"
         android:maxLines = "15"
         android:scrollbars = "vertical"
@@ -35,20 +35,24 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="Enter Quote ID : "
-            android:textSize="25sp" />
+            android:textSize="25sp"
+            android:textColor="@color/indigo"/>
 
         <EditText
             android:id="@+id/quoteid"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="number" />
+            android:inputType="number"
+            android:textColor="@color/pink" />
     </LinearLayout>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Create MyQuote"
         android:textAllCaps="false"
-        android:onClick="createQuote"/>
+        android:onClick="createQuote"
+        android:theme="@style/MyButton"
+        android:textColor="@color/white"/>
 
 </LinearLayout>

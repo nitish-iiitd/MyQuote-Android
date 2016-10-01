@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.util.Random;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -31,29 +33,31 @@ public class MainActivity extends AppCompatActivity {
     EditText et_sample;
 
     Paint paint;
+    SharedPreferences sharedpref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedpref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         setContentView(R.layout.activity_main);
-//image view
+        //image view
         iv_ttx = (ImageView) findViewById(R.id.iv_ttx);
-//to get screen width and hight
+        //to get screen width and hight
         DisplayMetrics displaymetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-//dimentions x,y of device to create a scaled bitmap having similar dimentions to screen size
+        //dimentions x,y of device to create a scaled bitmap having similar dimentions to screen size
         int height1 = displaymetrics.heightPixels;
         int width1 = displaymetrics.widthPixels;
-//paint object to define paint properties
+        //paint object to define paint properties
         paint = new Paint();
         paint.setStyle(Paint.Style.FILL);
-        paint.setColor(Color.BLUE);
-        paint.setTextSize(250);
-//loading bitmap from drawable
+        paint.setColor(Color.BLACK);
+        paint.setTextSize(150);
+        //loading bitmap from drawable
         originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.back);
-//scaling of bitmap
+        //scaling of bitmap
         originalBitmap = Bitmap.createScaledBitmap(originalBitmap, width1, height1, false);
-//creating another copy of bitmap to be used for editing
+        //creating another copy of bitmap to be used for editing
         image = originalBitmap.copy(Bitmap.Config.RGB_565, true);
 
         et_sample = (EditText) findViewById(R.id.et_txt);
@@ -65,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-//loading original bitmap again (undoing all editing)
+                //loading original bitmap again (undoing all editing)
                 image = originalBitmap.copy(Bitmap.Config.RGB_565, true);
                 iv_ttx.setImageBitmap(image);
             }
@@ -75,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View arg0) {
-//funtion save image is called with bitmap image as parameter
+        //function save image is called with bitmap image as parameter
                 saveImage(image);
 
             }
@@ -92,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
             user_text = (String) savedInstanceState.getSerializable("quote");
         }
 
-//funtion called to perform drawing
+        //function called to perform drawing
         createImage(100, 200, user_text);
 
 
@@ -120,18 +124,46 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Toast.makeText(MainActivity.this, "Image saved to 'txt_imgs' folder", Toast.LENGTH_LONG).show();
+        int prevnum = sharedpref.getInt("numquotes",0);
+        SharedPreferences.Editor editor = sharedpref.edit();
+        editor.putInt("numquotes",prevnum+1);
+        editor.commit();
     }
 
 
     public Bitmap createImage(float scr_x, float scr_y, String user_text) {
         //canvas object with bitmap image as constructor
+        System.out.println("Usertext:"+user_text);
         Canvas canvas = new Canvas(image);
         int viewTop = getWindow().findViewById(Window.ID_ANDROID_CONTENT).getTop();
-//removing title bar hight
+        //removing title bar height
         scr_y = scr_y - viewTop;
-//fuction to draw text on image. you can try more drawing funtions like oval,point,rect,etc...
+        //function to draw text on image. you can try more drawing functions like oval,point,rect,etc...
         canvas.drawText("" + user_text, scr_x, scr_y, paint);
         iv_ttx.setImageBitmap(image);
         return image;
+    }
+
+    public Bitmap finalImage(EditText text,Bitmap background)
+    {
+        Bitmap bmp = Bitmap.createBitmap(text.getDrawingCache());
+        Bitmap combined = combineImages(background,bmp);
+        return combined;
+    }
+    public Bitmap combineImages(Bitmap background, Bitmap foreground) {
+
+        int width = 0, height = 0;
+        Bitmap cs;
+
+        width = getWindowManager().getDefaultDisplay().getWidth();
+        height = getWindowManager().getDefaultDisplay().getHeight();
+
+        cs = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas comboImage = new Canvas(cs);
+        background = Bitmap.createScaledBitmap(background, width, height, true);
+        comboImage.drawBitmap(background, 0, 0, null);
+        comboImage.drawBitmap(foreground, 10,10, null);
+
+        return cs;
     }
 }

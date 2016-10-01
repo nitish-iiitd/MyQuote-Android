@@ -76,14 +76,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public Quote getQuote(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query(TABLE_QUOTES, new String[] { KEY_ID,
-                        KEY_ID, KEY_TEXT }, KEY_ID + "=?",
-                new String[] { String.valueOf(id) }, null, null, null, null);
+//        Cursor cursor = db.query(TABLE_QUOTES, new String[] { KEY_ID,
+//                        KEY_ID, KEY_TEXT }, KEY_ID + "=?",
+//                new String[] { String.valueOf(id) }, null, null, null, null);
+        String getquotequery = "SELECT * FROM " + TABLE_QUOTES + " WHERE "+KEY_ID+" = "+id;
+        Cursor cursor = db.rawQuery(getquotequery,null);
+
         if (cursor != null)
             cursor.moveToFirst();
 
-        Quote quote = new Quote(Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1));
+        Quote quote = new Quote(Integer.parseInt(cursor.getString(0)),cursor.getString(1));
         // return contact
         return quote;
     }

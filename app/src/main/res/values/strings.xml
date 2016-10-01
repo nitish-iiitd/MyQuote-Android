@@ -1,4 +1,24 @@
 <resources>
     <string name="app_name">MyQuote</string>
     <string name="title_activity_start">StartActivity</string>
+    <string name="tag">Like a quote ? Create a pic.</string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+
+
 </resources>

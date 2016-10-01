@@ -16,15 +16,24 @@ public class AddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add);
     }
 
+    /*
+     * Adds the given quote if non-empty, in the database
+     */
     public void addQuote(View v)
     {
         TextView quotetv  = (TextView)findViewById(R.id.quote);
         //System.out.println("Quote : "+quotetv.getText().toString());
-        Quote q  = new Quote(1,quotetv.getText().toString());
-        DatabaseHandler dh = new DatabaseHandler(this);
-        dh.addQuote(q);
-        Toast.makeText(this,"Added to database!",Toast.LENGTH_SHORT).show();
-        Intent startscreen = new Intent(this,StartActivity.class);
-        startActivity(startscreen);
+        if(!quotetv.getText().toString().equals("")) {
+            Quote q = new Quote(1, quotetv.getText().toString());
+            DatabaseHandler dh = new DatabaseHandler(this);
+            dh.addQuote(q);
+            Toast.makeText(this, "Quote added!", Toast.LENGTH_SHORT).show();
+            Intent startscreen = new Intent(this, StartActivity.class);
+            startActivity(startscreen);
+        }
+        else
+        {
+            Toast.makeText(this, "Cannot add an empty quote!", Toast.LENGTH_SHORT).show();
+        }
     }
 }

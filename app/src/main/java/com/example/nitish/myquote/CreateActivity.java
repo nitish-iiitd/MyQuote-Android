@@ -53,10 +53,10 @@ public class CreateActivity extends AppCompatActivity {
         DatabaseHandler dh = new DatabaseHandler(this);
         Quote q = new Quote();
         q = dh.getQuote(id);
-//        Intent startscreen = new Intent(this,MainActivity.class);
-//        System.out.println("Quote(createquote):"+q.getText());
-//        startscreen.putExtra("quote",q.getText());
-//        startActivity(startscreen);
+        Intent startscreen = new Intent(this,MainActivity.class);
+        System.out.println("Quote(createquote):"+q.getText());
+        startscreen.putExtra("quote",q.getText());
+        startActivity(startscreen);
     }
 
 

@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,7 +15,7 @@
         android:id="@+id/btn_save_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save Image"
+        android:text="@string/save_image"
         android:textSize="20sp"
         android:theme="@style/MyButton"
         android:textColor="@color/white"
@@ -23,7 +27,13 @@
         android:layout_height="wrap_content"
         android:scaleType="fitCenter"
         android:src="@drawable/back3" />
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:textColor="@color/pink"
+        android:text="@string/instruction"/>
 
 
 </LinearLayout>
+</ScrollView>

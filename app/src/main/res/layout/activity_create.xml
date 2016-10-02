@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_create"
@@ -34,7 +38,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Enter Quote ID : "
+            android:text="@string/enter_quote"
             android:textSize="25sp"
             android:textColor="@color/indigo"/>
 
@@ -49,10 +53,11 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create MyQuote"
+        android:text="@string/create_MyQuote"
         android:textAllCaps="false"
         android:onClick="createQuote"
         android:theme="@style/MyButton"
         android:textColor="@color/white"/>
 
 </LinearLayout>
+</ScrollView>

@@ -2,14 +2,16 @@
     <string name="app_name">MyQuote</string>
     <string name="title_activity_start">StartActivity</string>
     <string name="tag">Like a quote ? Create a pic.</string>
-    <!--<string name=""></string>-->
-    <!--<string name=""></string>-->
-    <!--<string name=""></string>-->
-    <!--<string name=""></string>-->
-    <!--<string name=""></string>-->
-    <!--<string name=""></string>-->
-    <!--<string name=""></string>-->
-    <!--<string name=""></string>-->
+    <string name="instruction">The image will be saved in the External Storage (not SD Card).
+    And will be available to other apps.
+    The created images will be persistent even on uninstalling the application.</string>
+    <string name="add_quote">Add Quote</string>
+    <string name="create_a_MyQuote">Create a MyQuote</string>
+    <string name="add_a_quote">Add a Quote</string>
+    <string name="wordlimit">(Upto 10 words)</string>
+    <string name="enter_quote">Enter Quote ID : </string>
+    <string name="create_MyQuote">Create MyQuote</string>
+    <string name="save_image">Save Image</string>
     <!--<string name=""></string>-->
     <!--<string name=""></string>-->
     <!--<string name=""></string>-->

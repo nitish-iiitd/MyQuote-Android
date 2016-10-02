@@ -20,7 +20,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Quote"
+        android:text="@string/add_quote"
         android:textSize="25dp"
         android:textAlignment="center"
         android:layout_marginTop="30dp"
@@ -28,7 +28,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="(Upto 10 words)"
+        android:text="@string/wordlimit"
         android:textSize="15dp"
         android:textAlignment="center"
         android:layout_margin="0dp"
@@ -46,7 +46,7 @@
         android:scrollHorizontally="false"/>
 
     <Button
-        android:text="Add Quote"
+        android:text="@string/add_quote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/button"

@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:onClick="goToCreateMyQuote"
-            android:text="Create a MyQuote"
+            android:text="@string/create_a_MyQuote"
             android:textAllCaps="false"
             android:theme="@style/MyButton"
             android:textColor="@color/white"/>

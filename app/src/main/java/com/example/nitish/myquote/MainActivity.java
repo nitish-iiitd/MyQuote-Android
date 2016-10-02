@@ -32,6 +32,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import static android.R.attr.bitmap;
+import static android.R.attr.scrollY;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View arg0) {
-                //function save image is called with bitmap image as parameter
+
                 saveImage(image);
 
             }
@@ -96,14 +97,14 @@ public class MainActivity extends AppCompatActivity {
             user_text = (String) savedInstanceState.getSerializable("quote");
         }
 
-        //function called to perform drawing
-        createImage(100, 100, user_text);
+        createImage(15, 100, user_text);
 
 
     }
 
     void saveImage(Bitmap img) {
-        String RootDir = Environment.getExternalStorageDirectory()
+        //String RootDir = Environment.getExternalStorageDirectory()+ File.separator + "myquotes";
+        String RootDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
                 + File.separator + "myquotes";
         File myDir = new File(RootDir);
         myDir.mkdirs();
@@ -119,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
             img.compress(Bitmap.CompressFormat.JPEG, 90, out);
             out.flush();
             out.close();
-            Toast.makeText(MainActivity.this, "Image saved to 'myquotes' folder", Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActivity.this, "Image saved to 'myquotes' folder in 'Download' folder", Toast.LENGTH_LONG).show();
             int prevnum = sharedpref.getInt("numquotes", 0);
             SharedPreferences.Editor editor = sharedpref.edit();
             editor.putInt("numquotes", prevnum + 1);
@@ -134,49 +135,23 @@ public class MainActivity extends AppCompatActivity {
 
     public Bitmap createImage(float scr_x, float scr_y, String user_text) {
         //canvas object with bitmap image as constructor
-        System.out.println("Usertext:" + user_text);
+        System.out.println("Usertext:"+user_text);
         Canvas canvas = new Canvas(image);
-        //int viewTop = getWindow().findViewById(Window.ID_ANDROID_CONTENT).getTop();
+        int viewTop = getWindow().findViewById(Window.ID_ANDROID_CONTENT).getTop();
         //removing title bar height
-        //scr_y = scr_y - viewTop;
+        scr_y = scr_y - viewTop;
         //function to draw text on image. you can try more drawing functions like oval,point,rect,etc...
+        String[] splitted = user_text.split(" ");
+        for(int i=0;i<splitted.length;i++)
+        {
+            canvas.drawText("" + splitted[i].toUpperCase(), scr_x, scr_y, paint);
+            scr_y=scr_y+100;
+        }
 
-        // draw text to the Canvas center
-        Rect bounds = new Rect();
-        createImage(user_text,canvas,bounds);
-//        paint.getTextBounds(user_text, 0, user_text.length(), bounds);
-//        int x = (image.getWidth() - bounds.width())/2;
-//        int y = (image.getHeight() + bounds.height())/2;
-//
-//        canvas.drawText(user_text, x, y, paint);
-//        iv_ttx.setImageBitmap(image);
-            return image;
-
-
+        iv_ttx.setImageBitmap(image);
+        return image;
     }
 
-    public Bitmap finalImage(EditText text, Bitmap background) {
-        Bitmap bmp = Bitmap.createBitmap(text.getDrawingCache());
-        Bitmap combined = combineImages(background, bmp);
-        return combined;
-    }
-
-    public Bitmap combineImages(Bitmap background, Bitmap foreground) {
-
-        int width = 0, height = 0;
-        Bitmap cs;
-
-        width = getWindowManager().getDefaultDisplay().getWidth();
-        height = getWindowManager().getDefaultDisplay().getHeight();
-
-        cs = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        Canvas comboImage = new Canvas(cs);
-        background = Bitmap.createScaledBitmap(background, width, height, true);
-        comboImage.drawBitmap(background, 0, 0, null);
-        comboImage.drawBitmap(foreground, 10, 10, null);
-
-        return cs;
-    }
 
     public Bitmap createImage(String quote,Canvas canvas,Rect bounds)
     {
@@ -206,36 +181,6 @@ public class MainActivity extends AppCompatActivity {
         return image;
     }
 
-//    @Override
-//    public void onSizeChanged (Canvas canvas, Rect bounds) {
-//        super.onLayout(canvas, bounds);
-//
-//        //String textOnCanvas = "I registered koc.sexy so that my package name can start with sexy.koc";
-//
-//
-//        StaticLayout sl = new StaticLayout(user_text, textPaint, bounds.width(),
-//                Layout.Alignment.ALIGN_CENTER, 1, 1, true);
-//
-//        canvas.save();
-//
-//        //calculate X and Y coordinates - In this case we want to draw the text in the
-//        //center of canvas so we calculate
-//        //text height and number of lines to move Y coordinate to center.
-//        float textHeight = getTextHeight(user_text, textPaint);
-//        int numberOfTextLines = sl.getLineCount();
-//        float textYCoordinate = bounds.exactCenterY() -
-//                ((numberOfTextLines * textHeight) / 2);
-//
-//        //text will be drawn from left
-//        float textXCoordinate = bounds.left;
-//
-//        canvas.translate(textXCoordinate, textYCoordinate);
-//
-//        //draws static layout on canvas
-//        sl.draw(canvas);
-//        canvas.restore();
-//
-//    }
     /**
      * @return text height
      */
